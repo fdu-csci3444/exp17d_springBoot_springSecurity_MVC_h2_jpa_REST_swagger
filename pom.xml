@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.javasampleapproach.h2</groupId>
+	<artifactId>exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
+	<name>exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger</name>
+	<description>SpringBoot sample project showing spring security, spring MVC using thymeleaf, h2, JPA, REST, swagger</description>
+
+	<!-- NOTE ilker starting with Spring 5, which spring-boot-starter-parent 2.x uses, have to use a password encoder 
+	          otherwise password check will fail with below WARN message in logs (console)
+	          WARN BCryptPasswordEncoder "Encoded password does not look like BCrypt"
+	          So when below version is 2.x, then make sure to set "mh.security.authserver.BCryptPasswordEncoder.usedToEncodePassword=true" in application.properties
+	-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.6.RELEASE</version>		<!-- NOTE ilker was 1.5.3.RELEASE(which uses spring-security-core 4.2.2) , latest is 2.2.6.RELEASE(which uses spring-security-core 5.2.2) on March 2020 -->
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+	<!--
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	-->
+		<java.version>1.8</java.version>
+		<springfox.version>2.9.2</springfox.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- NOTE ilker devtools, which watches changes in code and triggers auto deployments of app upon saved code changes, will ONLY be in effect during dev runs, will NOT be there in PROD jar build -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<!-- BEF ilker manually added dependencies -->
+		<!--NOTE ilker swagger SpringFox, which is a Spring implementation of swagger, dependencies -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox.version}</version>
+		</dependency>
+				
+		<!-- NOTE ilker below is optional and used to integrate spring security 5 with thymeleaf and use "security dialect" "sec:"
+		          then you can for example print username, his roles, authorities, show something if he has a role, etc 
+		          see https://www.thymeleaf.org/doc/articles/springsecurity.html  
+		-->
+		<dependency>
+		    <groupId>org.thymeleaf.extras</groupId>
+		    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>		
+		<!-- EOF ilker manually added dependencies -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
