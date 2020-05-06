@@ -72,7 +72,8 @@ which is not known by browser) , click "Advanced" button in Chrome, or in Opera 
 - the certificate will be cached and you won't need to do above afterwards on that browser 
 
 ## to access MVC UI home.html using HTTP
-- NOTE if you try to reach via http, it will auto redirect to https of above 
+- NOTE if you try to reach via http, it will auto redirect to https of above (using 
+  exp17d.config.security.HttpsSSLConfig4tomcat)
 http://localhost:8889/
 <br> or <br>
 http://localhost:8889/home
@@ -84,4 +85,10 @@ https://localhost:8890/rest/v1/patient/echoMessage
 - NOTE below requires login of provider_owner/provider_owner  or provider_admin/provider_admin 
   <br>
 https://localhost:8890/rest/v1/provider/echoMessage
+- NOTE below requires authentication, does not require any specific role, but just user 
+  logged in. If you login as "developer", which has 2 roles "DEVELOPER" and "ADMIN" 
+  then you can execute below save and login to h2 console and see new 5 rows added to 
+  h2 DB 
+  <br>
+https://localhost:8890/rest/v1/customer/save
 
