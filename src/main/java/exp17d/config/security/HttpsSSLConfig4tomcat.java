@@ -39,10 +39,11 @@ public class HttpsSSLConfig4tomcat {
         return tomcat;
     }
 
+    // NOTE ilker read below javaDoc
     /**
-    * We need to redirect from HTTP to HTTPS. Without SSL, this application used port 8889. With SSL it will use port 8890.
-    * So, any request for 8889 needs to be redirected to HTTPS on 8890.
-    */
+     * We need to redirect from HTTP to HTTPS. Without SSL, this application used port 8889. With SSL it will use port 8890.
+     * So, any request for 8889 needs to be redirected to HTTPS on 8890.
+     */
     private Connector httpToHttpsRedirectConnector() {
         Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
         connector.setScheme("http");

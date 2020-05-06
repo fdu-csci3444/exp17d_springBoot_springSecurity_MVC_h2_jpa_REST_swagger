@@ -42,14 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		configure_OLD(http);
-		configure_NEW(http);
-	}
-	
-	protected void configure_NEW(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				// sample MVC urls
-				.antMatchers("/", "/home","/public**").permitAll()	// NOTE ilker urls allowed to see with and without login(without being authenticated == anonymous)
+				.antMatchers("/", "/home","/public**").permitAll()	// NOTE ilker urls allowed to see with or without login(without being authenticated == anonymous)
 				.antMatchers("/anonymous").anonymous()				// NOTE ilker the difference of this is from above is, if user is logged in, then this page will NOT be accessible. When user is not logged in, this is another way of doing same thing as above, another url allowed to see without login
 				.antMatchers("/authenticated", "userSettings/**").authenticated()	// NOTE ilker probably not needed as ".anyRequest().authenticated()" line further below will cover this and "/user" url
 				.antMatchers("/admin", "/h2_console/**").hasRole("ADMIN")
@@ -106,6 +101,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				  NOTE ilker BCryptPasswordEncoder always generates a random salt, so if you invoke it 2 times with SAME input, it will return 2 DIFFERENT output
 				.withUser("user2").password(encode("user")).roles("USER")
 				.and()
+				.withUser("developer").password(encode("developer")).roles("DEVELOPER", "ADMIN")
+				.and()
 				.withUser("admin").password(encode("admin")).roles("ADMIN")
 				.and()
 				.withUser("patient").password(encode("patient")).roles("PATIENT")
@@ -116,9 +113,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.withUser("partner").password(encode("partner")).roles("PARTNER")
 				.and()
-				.withUser("internal").password(encode("internal")).roles("INTERNAL")
+				.withUser("internal").password(encode("internal")).roles("INTERNAL")	// NOTE ilker "role" is typically more coarse granular 
 				.and()
-				.withUser("provider_owner").password(encode("provider_owner")).roles("PROVIDER_OWNER").authorities("PROVIDER_CAN_ECHO")
+				.withUser("provider_owner").password(encode("provider_owner")).roles("PROVIDER_OWNER").authorities("PROVIDER_CAN_ECHO") // NOTE ilker "authority" is fine granular "permissions"("privileges")
 				.and()
 				.withUser("provider_admin").password(encode("provider_admin")).roles("PROVIDER_ADMIN").authorities("PROVIDER_CAN_ECHO", "PROVIDER_CAN_VIEW_APPOINMENTS")
 				.and()

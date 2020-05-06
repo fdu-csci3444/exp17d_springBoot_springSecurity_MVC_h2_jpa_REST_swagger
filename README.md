@@ -67,8 +67,9 @@ https://localhost:8890/
 <br> or <br>
 https://localhost:8890/home
 <br>
-It will complain "Your connection is not private"(because using self signed certificate 
-which is not known by browser) , click "Advanced" button. Then click "Proceed to localhost(unsafe)" 
+- Upon your 1st access with a browser, it will complain "Your connection is not private"(because using self signed certificate 
+which is not known by browser) , click "Advanced" button in Chrome, or in Opera click "Explain more". Then click "Proceed to localhost(unsafe)" 
+- the certificate will be cached and you won't need to do above afterwards on that browser 
 
 ## to access MVC UI home.html using HTTP
 - NOTE if you try to reach via http, it will auto redirect to https of above 
