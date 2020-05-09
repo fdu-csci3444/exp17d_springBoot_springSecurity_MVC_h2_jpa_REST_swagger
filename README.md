@@ -1,7 +1,8 @@
 # exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger
 Example SpringBoot project showing;
-- spring security (see exp17d.config.security.SecurityConfig)
+- using spring security to protect app's web page and REST URLs (see exp17d.config.security.SecurityConfig)
 - using Https SSL via self signed certificate
+- implementing CommandLineRunner in a @Component to initialize Db (see exp17d.init.InitDbCommandLineRunner4customer)
 - spring MVC using thymeleaf as templating engine (see exp17d.mvc.WebController and 
   src/main/resources/templates/*.html)
 - using "thymeleaf security dialect" (see pom.xml and src/main/resources/templates.home.html)
@@ -52,8 +53,8 @@ keytool -genkey -alias exp17d -storetype PKCS12 -keyalg RSA -keysize 2048 -keyst
 ## to access h2 console
 - http://localhost:8889/h2_console
 - since end points are protected with Spring Security, and configured h2 related urls 
-  to be protected and allowed for user's with "ADMIN" role, login as admin/admin in 
-  the login popup
+  to be protected and allowed for user's with "ADMIN" role, like admin/admin or 
+  developer/developer, in the login popup
 - use below values in h2 console
 Driver Class: org.h2.Driver                <br>
 JDBC URL:     jdbc:h2:file:~/h2/testdb     <br>
