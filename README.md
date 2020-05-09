@@ -2,7 +2,8 @@
 Example SpringBoot project showing;
 - using spring security to protect app's web page and REST URLs (see exp17d.config.security.SecurityConfig)
 - using Https SSL via self signed certificate
-- implementing CommandLineRunner in a @Component to initialize Db (see exp17d.init.InitDbCommandLineRunner4customer)
+- implementing CommandLineRunner in a @Component to initialize Db (see exp17d.init.InitDbCommandLineRunner4customer 
+  also can refer to https://howtodoinjava.com/spring-boot/command-line-runner-interface-example/)
 - spring MVC using thymeleaf as templating engine (see exp17d.mvc.WebController and 
   src/main/resources/templates/*.html)
 - using "thymeleaf security dialect" (see pom.xml and src/main/resources/templates.home.html)
