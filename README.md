@@ -15,19 +15,36 @@ Example SpringBoot project showing;
 - REST (see exp17d.rest.*)
 - swagger (see exp17d.config.SwaggerConfig)
 
+## Security
+### authentication && authorization
+- authentication is knowing who the user is. User is somehow able to prove who he is, 
+  then he is authenticated. Authentication can be done via user providing correct username/password 
+  or user providing a verifiable "token"(like JWT)
+- authorization is allowing an authenticated user to access a feature or data
+
+### roles && permissions(authorities)
+- permissions is fine granular, specifies what user is allowed to access/do. Permissions 
+  is also called "authorities"
+- roles is coarse, typically specifies a range of things user is allowed to access/do
+- usually roles contains permissions
+- NOTE ilker in Spring Security, if a user is provisioned to have roles and authorities, 
+  then authorities takes is used and roles is not used. In that case, the roles need 
+  to be added to authorities with "ROLE_" prefix (see "provider_admin" user accessing 
+  "rest/v1/provider/echoMessage4RolePROVIDER_ADMIN")
+
 ## Spring Security
 - NOTE ilker, this application's MVC and REST (and it's h2 console, since it gets deployed along 
 with app) is protected via "Spring Security"
 - Spring Security can be used in 4 or more ways;
   - using "Spring Security Auto Configuration"("default Spring Security Config"), where you 
     do not configure anything but include "spring-boot-starter-security" dependency 
-    in pom.xml
+    in pom.xml only
   - using "Http Basic"
   - using "Http form validation"
   - using JWT
   - using OAuth2
 
-## generating "Self Signed" "SSL Certificate"
+## generating "Self Signed" "SSL Certificate" to use with Https
 - open a dos command as administrator
 - use keytool that is there in jdk bin
 - check that keytool is found from the path via "where keytool"
@@ -93,4 +110,15 @@ https://localhost:8890/rest/v1/provider/echoMessage
   h2 DB 
   <br>
 https://localhost:8890/rest/v1/customer/save
+
+## how to access generated swagger api documentations
+- swagger generated json document link(assuming app is started on port 8888) <br> 
+  NOTE ilker suggest installing "JSONView" extension to google Chrome browser to better view the JSON returned by below link 
+  <br>
+  http://localhost:8889/v2/api-docs        <br>
+  https://localhost:8890/v2/api-docs       <br>
+- swagger generated html(UI) documents link (http will be auto redirected to https)    <br>
+  http://localhost:8889/swagger-ui.html    <br>
+  https://localhost:8890/swagger-ui.html    <br>
+
 

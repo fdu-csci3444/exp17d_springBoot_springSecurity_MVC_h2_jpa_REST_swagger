@@ -17,7 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
-	@Value("${mh.security.authserver.BCryptPasswordEncoder.usedToEncodePassword}")
+	// NOTE ilker in below setting default value as true, that will be used when this property is not there in application.properties
+	@Value("${mh.security.authserver.BCryptPasswordEncoder.usedToEncodePassword:true}")
 	private boolean useBCryptPasswordEncoder2encodePassword;
 	
 	/**
@@ -56,7 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/internal/**").hasAnyRole("INTERNAL", "INTERNAL_OWNER")
 				// REST api urls
 				.antMatchers("/rest/v1/patient/echoMessage").hasRole("PATIENT")
-				.antMatchers("/rest/v1/provider/echoMessage").hasAnyAuthority("PROVIDER_CAN_ECHO", "PROVIDER_CAN_VIEW_APPOINMENTS")	// NOTE can also use "authority"("permission") instead of "role"
+				.antMatchers("/rest/v1/provider/echoMessage").hasAnyAuthority("ECHO", "VIEW_APPOINMENTS")	// NOTE can also use "authority"("permission") instead of "role"
+				.antMatchers("/rest/v1/provider/echoMessage4RolePROVIDER_ADMIN").hasRole("PROVIDER_ADMIN")	// NOTE can also use "authority"("permission") instead of "role"
 				// NOTE ilker rest of urls that are not matched via above antMathers will be caught by below line. Rest of urls require user to be logged in, meaning if authenticated then allow to proceed to that url, otherwise redirect to "/login"
 				.anyRequest().authenticated()	// NOTE ilker if not authenticated and trying to access an authenticated url, it will 1st try to go to url, then will be "redirected"(302) to "login" page(with "location" attribute in response pointing to login url), after user logs in, he will go to url 
 				.and()
@@ -115,9 +117,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.withUser("internal").password(encode("internal")).roles("INTERNAL")	// NOTE ilker "role" is typically more coarse granular 
 				.and()
-				.withUser("provider_owner").password(encode("provider_owner")).roles("PROVIDER_OWNER").authorities("PROVIDER_CAN_ECHO") // NOTE ilker "authority" is fine granular "permissions"("privileges")
+//				.withUser("provider_owner").password(encode("provider_owner")).roles("PROVIDER_OWNER").authorities("ECHO")	// WRONG   - NOTE ilker "authority" is fine granular "permissions"("privileges")
+				.withUser("provider_owner").password(encode("provider_owner")).authorities("ECHO", "ROLE_PROVIDER_OWNER")	// CORRECT - NOTE ilker "authority" is fine granular "permissions"("privileges")
 				.and()
-				.withUser("provider_admin").password(encode("provider_admin")).roles("PROVIDER_ADMIN").authorities("PROVIDER_CAN_ECHO", "PROVIDER_CAN_VIEW_APPOINMENTS")
+//				.withUser("provider_admin").password(encode("provider_admin")).roles("PROVIDER_ADMIN").authorities("ECHO", "VIEW_APPOINMENTS", "ROLE_ADMIN") // WRONG   - NOTE ilker when roles and authorities are both set for a user, authorities takes 1st place and roles are not used. So in this case need to add roles with "ROLE_" prefix into authorities. That is why "provider_admin" will NOT be able access "/rest/v1/provider/echoMessage4RolePROVIDER_ADMIN"
+				.withUser("provider_admin").password(encode("provider_admin")).authorities("ECHO", "VIEW_APPOINMENTS", "ROLE_ADMIN", "ROLE_PROVIDER_ADMIN")		 // CORRECT - NOTE ilker when roles and authorities are both set for a user, authorities takes 1st place and roles are not used. So in this case need to add roles with "ROLE_" prefix into authorities. That is why "provider_admin" will     be able access "/rest/v1/provider/echoMessage4RolePROVIDER_ADMIN"
 				.and()
 				.withUser("provider_secretary").password(encode("provider_secretary")).roles("PROVIDER_SECRETARY")
 				.and()

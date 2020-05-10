@@ -16,12 +16,12 @@ import io.swagger.annotations.ApiParam;
 public class PatientRestController {
 	private static final Logger logger = LoggerFactory.getLogger(PatientRestController.class);
        
-	// curl -i -X GET http://localhost:8888/rest/v1/patient/echoMessage?msg=Hi
+	// curl -i -X GET http://localhost:8889/rest/v1/patient/echoMessage?msg=Hi
 	@RequestMapping(value="/echoMessage", method=RequestMethod.GET)
 //	@RequestMapping("/echoMessage") // NOTE ilker, equivalent to above line since default is GET. NOTE ilker WRONG to use when you enable swagger, because swagger thinks all operations(GET,POST,PUT,DELETE,PATH) are there
 //	@GetMapping("/echoMessage")		// NOTE ilker, equivalent to above line as well
 	/**
-	 * http://localhost:8888/rest/v1/patient/echoMessage?msg=Hi
+	 * http://localhost:8889/rest/v1/patient/echoMessage?msg=Hi
 	 */
 	// NOTE ilker below optional swagger annotation @ApiOperation can be used to better describe(instead of default of providing method name) what the api end point(resource) does
 	@ApiOperation(value = "To test this REST end point is alive via echo",

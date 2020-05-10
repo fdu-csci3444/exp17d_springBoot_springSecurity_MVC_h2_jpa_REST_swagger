@@ -53,9 +53,10 @@
 	 
 	 <!-- NOTE ilker sec:  is "thymeleaf security dialect" made available by including thymeleaf-extras-springsecurity5 dependency -->
 	 <div sec:authorize="isAuthenticated()">
-	 	Logged user: <span sec:authentication="name">Bob</span>
+	 	Logged user: <span sec:authentication="name"></span>
 	 	<br/>
-		Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+	 	<!-- NOTE ilker, sec:authentication="principal.roles" does NOT exist -->
+		Authorities: <span sec:authentication="principal.authorities"></span>
 	 	<br/>	 
      	<form th:action="@{/logout}" method="post">
          <input type="submit" value="Sign Out"/>
