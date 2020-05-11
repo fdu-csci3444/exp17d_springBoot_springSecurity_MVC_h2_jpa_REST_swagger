@@ -72,7 +72,7 @@ keytool -genkey -alias exp17d -storetype PKCS12 -keyalg RSA -keysize 2048 -keyst
 https://github.com/fdu-csci3444/exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger
 - add git remote at gitbash command line
 ```bash
-cd /c/fdu/csci3444/projects/ex10c-angular-basics
+cd /c/fdu/csci3444/projects/exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger
 git remote add origin https://github.com/fdu-csci3444/exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger.git
 ```
 - to see the above added remote in remotes list <br>
