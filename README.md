@@ -66,6 +66,41 @@ keytool -genkey -alias exp17d -storetype PKCS12 -keyalg RSA -keysize 2048 -keyst
   Is CN=ilker kiris, OU=mh, O=mh, L=Holmdel, ST=NJ, C=US correct?
   [no]: yes
 ```
+## github related things
+### to add remote github of this project at gitbash command line with default remote name of 'origin'
+- 1st create the remote github project via github <br>
+https://github.com/fdu-csci3444/exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger
+- add git remote at gitbash command line
+```bash
+cd /c/fdu/csci3444/projects/ex10c-angular-basics
+git remote add origin https://github.com/fdu-csci3444/exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger.git
+```
+- to see the above added remote in remotes list <br>
+origin  https://github.com/fdu-csci3444/exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger.git (fetch) <br>
+origin  https://github.com/fdu-csci3444/exp17d_springBoot_springSecurity_MVC_h2_jpa_REST_swagger.git (push)  <br>
+```bash
+git remote -v
+```
+- to see detailed info (inspect) of remote named 'origin'
+```bash
+git remote show origin
+```
+
+### to push to remote at gitbash command line local branch 'master' to remote named 'origin' 
+- NOTE ilker below '-u' sets upstream reference and git will know wherer to fetch or pull or push in the future
+```bash
+git push -u origin master
+```
+
+### to pull(which does fetch + merge) from remote at gitbash command line from remote named 'origin' to local branch 'master' 
+```bash
+git pull origin master
+```
+
+### to fetch from remote at gitbash command line from remote named 'origin' 
+```bash
+git fetch origin
+```
 
 
 ## to access h2 console
